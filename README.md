@@ -4,8 +4,7 @@
 
 Tutorial Kernel from [OSDev](http://wiki.osdev.org/Bare_Bones)
 
-This uses a multiboot standard header to load in the kernel program. The kernel
-only displays "Hello, kernel World\n" on the screen.
+This uses a multiboot standard header to load in the kernel program.
 
 Requires cross-compiler for ix86 in order to build. Follow the instructions on
 [Building GCC Cross-Compiler](http://wiki.osdev.org/GCC_Cross-Compiler). The

@@ -77,11 +77,34 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
     terminal_buffer[index] = vga_entry(c, color);
 }
 
+void scroll_buffer(void) {
+    /* copy each row to into the previous */
+    for (size_t y = 0; y < VGA_HEIGHT-1; y++) {
+        for (size_t x = 0; x < VGA_WIDTH; x++) {
+            const size_t from_index = (y+1) * VGA_WIDTH + x;
+            const size_t to_index = y * VGA_WIDTH + x;
+            terminal_buffer[to_index] = terminal_buffer[from_index];
+        }
+    }
+
+    /* Re-initialize the last row to be cleared */
+    for (size_t x = 0; x < VGA_WIDTH; x++) {
+        const size_t index = (VGA_HEIGHT - 1) * VGA_WIDTH + x;
+        terminal_buffer[index] = vga_entry(' ', terminal_color);
+    }
+}
+
+void advance_row(void) {
+    if (++terminal_row == VGA_HEIGHT) {
+        terminal_row--;
+        scroll_buffer();
+    }
+}
+
 void terminal_putchar(char c) {
     if (c == '\n') {
         terminal_column = 0;
-        if (++terminal_row == VGA_HEIGHT)
-            terminal_row = 0;
+        advance_row();
         return;
     }
     
@@ -89,8 +112,7 @@ void terminal_putchar(char c) {
     
     if (++terminal_column == VGA_WIDTH) {
         terminal_column = 0;
-        if (++terminal_row == VGA_HEIGHT)
-            terminal_row = 0;
+        advance_row();
     }
 }
 
@@ -105,5 +127,30 @@ void terminal_writestring(const char *data) {
 
 void kernel_main(void) {
     terminal_initialize();
-    terminal_writestring("Hello, kernel World!\nThis is on the second line.\n");
+    terminal_writestring("Hello, kernel World!\n");
+    terminal_writestring("Line 2\n");
+    terminal_writestring("Line 3\n");
+    terminal_writestring("Line 4\n");
+    terminal_writestring("Line 5\n");
+    terminal_writestring("Line 6\n");
+    terminal_writestring("Line 7\n");
+    terminal_writestring("Line 8\n");
+    terminal_writestring("Line 9\n");
+    terminal_writestring("Line 10\n");
+    terminal_writestring("Line 11\n");
+    terminal_writestring("Line 12\n");
+    terminal_writestring("Line 13\n");
+    terminal_writestring("Line 14\n");
+    terminal_writestring("Line 15\n");
+    terminal_writestring("Line 16\n");
+    terminal_writestring("Line 17\n");
+    terminal_writestring("Line 18\n");
+    terminal_writestring("Line 19\n");
+    terminal_writestring("Line 20\n");
+    terminal_writestring("Line 21\n");
+    terminal_writestring("Line 22\n");
+    terminal_writestring("Line 23\n");
+    terminal_writestring("Line 24\n");
+    terminal_writestring("Line 25\n");
+    terminal_writestring("Line 26");
 }
