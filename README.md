@@ -2,17 +2,17 @@
 ### Minimal Kernel
 #### i686-elf Bare Bones OS using GRUB for bootloader
 
-Tutorial Kernel from [OSDev](wiki.osdev.org/Bare_Bones)
+Tutorial Kernel from [OSDev](http://wiki.osdev.org/Bare_Bones)
 
 This uses a multiboot standard header to load in the kernel program. The kernel
 only displays "Hello, kernel World\n" on the screen.
 
-Requires cross-compiler for i386 in order to build. Follow the instructions on
+Requires cross-compiler for ix86 in order to build. Follow the instructions on
 [Building GCC Cross-Compiler](http://wiki.osdev.org/GCC_Cross-Compiler). The
 kernel was built on Arch Linux 4.2.1 with the following versions or required
 programs:
 - gcc-6.2.0 (cross-compiler version)
-- binutils-2.27 (for i386 assembler)
+- binutils-2.27 (for assembler)
 - GNU Make 4.2.1
 - GNU Bison 3.0.4
 - Flex 2.6.1
